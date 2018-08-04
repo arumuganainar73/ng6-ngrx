@@ -16,18 +16,24 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FakeBackendService } from 'src/app/fake-backend/fake-backend.service';
+import { TaskCompComponent } from './task-comp/task-comp.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { TaskComponentService } from './task-comp/task-comp.service';
 
 
 const appRoutes: Routes = [
-/*   { path: 'first-page', component: FirstPageComponent }, */
-  { path: '', redirectTo: 'first-page', pathMatch: 'full' },
-  { path: '**', redirectTo: 'first-page' }
+ { path: 'home', component: WelcomeComponent },
+ { path: 'task', component: TaskCompComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    MyNavComponent
+    MyNavComponent,
+    TaskCompComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +52,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [TaskComponentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

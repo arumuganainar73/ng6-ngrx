@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm">
+      <mat-form-field class="example-full-width">
+        <input  matInput [(ngModel)]="myTask" name="myTask" type="text" placeholder="Enter Task" required>
+      </mat-form-field>
+
+      <p *ngIf="loading">
+        <i class="fa fa-spinner fa-spin"></i>
+      </p>
+      <span>&nbsp;&nbsp;</span>
+      <span class="">
+        <button  mat-raised-button color="primary"  [disabled]="!f.valid" (click)="create()">
+          Save Task
+        </button>
+      </span>
+    </form>
+  </div>
+  <div class="col-md-6 button-row">
+    <table class="table table-hover" >
+      <tr>
+        <th>#</th>
+        <th>Task</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let task of tasks">
+        <td>{{task.id}}</td>
+        <td>
+          <span *ngIf="!task.editing">{{task.description}}</span>
+          <div *ngIf="task.editing">
+            <span class="form-group">
+              <input type="text" [(ngModel)]="taskEdit.description" />
+            </span>
+            <span class="form-group">
+              <button mat-button color="warn" (click)="saveEdit(task)">
+                Save
+              </button>
+            </span>
+          </div>
+
+        </td>
+        <td>
+          <button mat-stroked-button  [disabled]="editMode" (click)="edit(task)">
+            <i class="fa fa-edit"></i>
+          </button>
+
+          <button mat-stroked-button  [disabled]="editMode" (click)="delete(task)">
+            <i class="fa fa-remove"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
